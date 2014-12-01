@@ -1,4 +1,4 @@
-karlproject
-===========
+docs
+====
 
-GitHub Pages repo for Jekyll assets. Specs, demos, etc.
+Jekyll-based specs, docs, and demos hosted on karlproject.github.io
