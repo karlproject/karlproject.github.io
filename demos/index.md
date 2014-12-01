@@ -6,3 +6,4 @@ order: 2
 
 # Demos
 
+[demo](/demos/dashboard)
