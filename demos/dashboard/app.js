@@ -1,4 +1,4 @@
-angular.module('hello', ['moondash'])
+angular.module('karl5', ['moondash'])
   .controller(
   'HelloCtrl',
   function () {
