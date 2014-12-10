@@ -3,18 +3,14 @@
     $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('site', {
-               parent: 'root',
-               sectionGroup: {
-                 label: 'Demo',
-                 priority: 2
-               }
+               parent: 'root'
              })
       .state('site.home', {
                url: '/home',
                title: 'Home',
                section: {
-                 group: 'site',
-                 priority: 3
+                 group: 'root',
+                 priority: 0
                },
                views: {
                  'md-content@root': {
@@ -22,156 +18,180 @@
                  }
                }
              })
-      .state('site.features', {
-               url: '/features',
-               title: 'Features',
-               section: {
-                 group: 'site',
-                 priority: 4
-               },
-               views: {
-                 'md-content@root': {
-                   templateUrl: 'templates/features.html',
-                   controller: 'FeaturesCtrl as ctrl',
-                   resolve: {
-                     resource: function (Restangular) {
-                       return Restangular.one('features').get();
-                     }
-                   }
-                 }
-               }
-             })
-      .state('site.collapse', {
-               url: '/collapse',
-               title: 'Collapse',
-               section: {
-                 group: 'site'
-               },
-               views: {
-                 'md-content@root': {
-                   templateUrl: 'templates/collapse.html',
-                   controller: 'CollapseCtrl as ctrl'
-                 }
-               }
-             })
-      .state('site.form', {
-               url: '/form',
-               title: 'Form',
-               section: {
-                 group: 'site'
-               },
-               views: {
-                 'md-content@root': {
-                   templateUrl: 'templates/form.html',
-                   controller: 'FormCtrl as ctrl'
-                 }
-               }
-             })
-      .state('site.grid', {
-               url: '/grid',
-               title: 'Grid',
-               section: {
-                 group: 'site'
-               },
-               views: {
-                 'md-content@root': {
-                   templateUrl: 'templates/grid.html',
-                   controller: 'GridCtrl as ctrl'
-                 }
-               }
-             })
-      .state('security', {
+      .state('admin', {
+               url: '/admin',
                parent: 'site',
+               title: 'Admin',
                sectionGroup: {
-                 label: 'Security and Errors',
-                 priority: 2
+                 group: 'admin'
                }
              })
-      .state('security.overview', {
-               url: '/overview',
-               title: 'Overview',
-               section: {
-                 group: 'security',
-                 priority: 0
-               },
+      .state('admin.dashboard', {
+               url: '/dashboard',
+               title: 'Admin Dashboard',
+               section: {group: 'admin'},
                views: {
                  'md-content@root': {
-                   templateUrl: 'templates/security.overview.html'
+                   template: '<h1>Admin Dashboard</h1>'
                  }
                }
              })
-      .state('security.none', {
-               url: '/none',
-               title: 'No Security',
-               section: {
-                 group: 'security',
-                 priority: 1
-               },
+      .state('admin.siteannounce', {
+               url: '/siteannouncement',
+               title: 'Site Announcement',
+               section: {group: 'admin'},
                views: {
                  'md-content@root': {
-                   template: '<h1>No Security Needed</h1>'
+                   template: '<h1>Site Announcement</h1>'
+                 }
+               }
+             }).state('admin.logs', {
+                        url: '/logs',
+                        title: 'Logs',
+                        parent: 'admin',
+                        section: {group: 'admin'}
+                      })
+      .state('admin.logs.system_logs', {
+               url: '/system_logs',
+               title: 'System Logs',
+               subsection: {section: 'admin.logs'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>System Logs</h1>'
                  }
                }
              })
-      .state('security.frontend', {
-               url: '/frontend',
-               title: 'Frontend Marker',
-               authenticate: true,
-               section: {
-                 group: 'security',
-                 priority: 2
-               },
+      .state('admin.logs.feed_dump', {
+               url: '/feed_dump',
+               title: 'Feed Dump',
+               subsection: {section: 'admin.logs'},
                views: {
                  'md-content@root': {
-                   template: '<h1>Frontend Security</h1>'
+                   template: '<h1>Feed Dump</h1>'
                  }
                }
              })
-      .state('security.backend', {
-               url: '/backend',
-               title: 'Backend Marker',
-               section: {
-                 group: 'security',
-                 priority: 3
-               },
+      .state('admin.logs.metrics', {
+               url: '/metrics',
+               title: 'Metrics',
+               subsection: {section: 'admin.logs'},
                views: {
                  'md-content@root': {
-                   template: '<h1>Backend Security</h1>',
-                   resolve: {
-                     resource: function (Restangular) {
-                       return Restangular.one('security/backend').get();
-                     }
-                   }
+                   template: '<h1>Metrics</h1>'
                  }
                }
              })
-      .state('security.forbidden', {
-               url: '/forbidden',
-               title: 'Forbidden',
-               section: {
-                 group: 'security',
-                 priority: 4
-               },
+      .state('admin.logs.debug_converters', {
+               url: '/debug_converters',
+               title: 'Debug Converters',
+               subsection: {section: 'admin.logs'},
                views: {
                  'md-content@root': {
-                   template: '<h1>Forbidden Resource</h1>'
+                   template: '<h1>Debug Converters</h1>'
                  }
                }
              })
 
-      .state('security.error', {
-               url: '/error',
-               title: 'Error',
-               section: {
-                 group: 'security',
-                 priority: 5
-               },
+      .state('admin.content', {
+               url: '/content',
+               title: 'Content',
+               parent: 'admin',
+               section: {group: 'admin'}
+             })
+      .state('admin.content.move', {
+               url: '/move',
+               title: 'Move',
+               subsection: {section: 'admin.content'},
                views: {
                  'md-content@root': {
-                   template: '<h1>Some Error Page</h1>'
+                   template: '<h1>Move Content</h1>'
                  }
                }
-             });
+             })
+      .state('admin.content.delete', {
+               url: '/delete',
+               title: 'Delete',
+               subsection: {section: 'admin.content'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>Delete Content</h1>'
+                 }
+               }
+             })
+
+      .state('admin.people', {
+               url: '/people',
+               title: 'People',
+               parent: 'admin',
+               section: {group: 'admin'}
+             })
+      .state('admin.people.config', {
+               url: '/config',
+               title: 'PDC',
+               subsection: {section: 'admin.people'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>People Directory Configuration</h1>'
+                 }
+               }
+             })
+      .state('admin.people.upload_csv', {
+               url: '/upload_csv',
+               title: 'Upload CSV',
+               subsection: {section: 'admin.people'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>Upload CSV</h1>'
+                 }
+               }
+             })
+      .state('admin.people.rename_merge', {
+               url: '/rename_merge',
+               title: 'Rename/Merge',
+               subsection: {section: 'admin.people'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>Rename/Merge</h1>'
+                 }
+               }
+             })
+
+      .state('admin.email', {
+               url: '/email',
+               title: 'Email',
+               parent: 'admin',
+               section: {group: 'admin'}
+             })
+      .state('admin.email.send', {
+               url: '/send',
+               title: 'Send to Members',
+               subsection: {section: 'admin.email'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>Send to Members</h1>'
+                 }
+               }
+             })
+      .state('admin.email.quarantine', {
+               url: '/quarantine',
+               title: 'View Quarantine',
+               subsection: {section: 'admin.email'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>View Quarantine</h1>'
+                 }
+               }
+             })
+      .state('admin.update_offices', {
+               url: '/update_offices',
+               title: 'Update Offices',
+               section: {group: 'admin'},
+               views: {
+                 'md-content@root': {
+                   template: '<h1>Update Offices</h1>'
+                 }
+               }
+             })
   }
 
   angular.module('k5')
