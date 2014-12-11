@@ -9,16 +9,19 @@
 
       <div class="checkbox">
         <label>
-          <input type="checkbox"> Over 18
-          months
+          <input type="checkbox"
+              ng-model="ctrl.isInactive"
+              ng-change="ctrl.runFilters()"> Only over 18 months
         </label>
       </div>
       <div class="input-group">
         <input type="text" class="form-control input-xs"
+               ng-model="ctrl.filterText"
                placeholder="Title contains...">
 
         <div class="input-group-btn">
-          <button type="button" class="btn btn-default">
+          <button type="button" class="btn btn-default"
+              ng-click="ctrl.runFilters()">
             <i class="glyphicon glyphicon-search"></i>
           </button>
         </div>
@@ -35,7 +38,7 @@
         </thead>
         <tbody>
         <tr
-            ng-repeat="ia in ctrl.inactive_communities | orderBy:'activityDate'">
+            ng-repeat="ia in ctrl.inactiveCommunities | orderBy:'activityDate'">
           <td ng-bind="ia.name">Name</td>
           <td ng-bind="ia.activityDate"></td>
           <td ng-bind="ia.items"></td>

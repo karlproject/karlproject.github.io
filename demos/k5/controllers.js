@@ -1,16 +1,30 @@
 (function () {
 
-  function BoxListCtrl(resource, $http, Restangular) {
-    this.inactive_communities = resource;
-    var prefix = '/api/to_archive';
+  function BoxListCtrl(resource, Restangular) {
+    var _this = this;
+    this.inactiveCommunities = resource;
+
+    // Handle filters
+    this.isInactive = true;
+    this.filterText = null;
+    this.runFilters = function () {
+      // User clicked the "Over 18 months" checkbox or the search box
+      baseInactives.getList(
+        {
+          inactive: this.isInactive,
+          filterText: this.filterText
+        }
+      )
+        .then(function (response) {
+                      _this.inactiveCommunities = response;
+              });
+    };
+
 
     var baseInactives = Restangular.all('to_archive');
 
-    baseInactives.getList()
-      .then(function (response) {
-                  console.debug('r323', response);
-                })
 
+    var prefix = '/api/to_archive';
     this.start = function (targetId) {
       $http.post(prefix + '/start', data)
         .success(function (response) {

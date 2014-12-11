@@ -51,19 +51,34 @@
         {
           method: 'GET',
           pattern: /api\/to_archive.*$/,
-          responder: function (method, url, data, headers) {
+          responder: function (method, url) {
+            /*
+            Process two filters:
+            - inactive == 'true' or otherwise
+            - filterText, lowercase comparison
+             */
             var params = getParams(url);
+            var filtered = _(communities).clone();
+
             if (params.inactive == 'true') {
-              var filtered = _(communities).filter(
+              filtered = _(communities).filter(
                 function (item) {
                   return !item.activityDate.startsWith('2014');
                 }
               ).value();
-              return [200, filtered];
             }
-            ;
 
-            return [200, communities];
+            if (params.filterText) {
+              var ft = params.filterText.toLowerCase();
+              filtered = _(filtered).filter(
+                function (item) {
+                  var orig = item.name.toLowerCase();
+                  return orig.indexOf(ft) > -1;
+                }
+              ).value();
+            }
+
+            return [200, filtered];
           }
         }
       ]);
