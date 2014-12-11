@@ -46,7 +46,8 @@
                    controller: 'BoxListCtrl as ctrl',
                    resolve: {
                      resource: function (Restangular) {
-                       return Restangular.all('to_archive').getList();
+                       return Restangular.all('to_archive')
+                         .getList({inactive: true});
                      }
                    }
                  }

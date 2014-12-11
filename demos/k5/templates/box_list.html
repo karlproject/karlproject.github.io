@@ -16,6 +16,7 @@
       <div class="input-group">
         <input type="text" class="form-control input-xs"
                placeholder="Title contains...">
+
         <div class="input-group-btn">
           <button type="button" class="btn btn-default">
             <i class="glyphicon glyphicon-search"></i>
@@ -33,7 +34,8 @@
         <th>Action</th>
         </thead>
         <tbody>
-        <tr ng-repeat="ia in ctrl.inactive_communities">
+        <tr
+            ng-repeat="ia in ctrl.inactive_communities | orderBy:'activityDate'">
           <td ng-bind="ia.name">Name</td>
           <td ng-bind="ia.activityDate"></td>
           <td ng-bind="ia.items"></td>
