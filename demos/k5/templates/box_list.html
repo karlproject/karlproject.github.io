@@ -1,9 +1,58 @@
-<div>
+<div class="container">
   <h1>Archive to Box</h1>
-  <p>The following features are implemented in this demo:</p>
 
-  <ul>
-    <li ng-repeat="feature in ctrl.features" ng-bind="feature">Feature
-    </li>
-  </ul>
+  <div class="row">
+
+    <div class="col-md-2">
+
+      <h5 class="text-muted">Filters</h5>
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Over 18
+          months
+        </label>
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-control input-xs"
+               placeholder="Title contains...">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+        <!-- /btn-group -->
+      </div>
+    </div>
+    <div class="col-md-7">
+      <table class="table table-striped">
+        <thead>
+        <th>Name</th>
+        <th>Activity Date</th>
+        <th>Items</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="ia in ctrl.inactive_communities">
+          <td ng-bind="ia.name">Name</td>
+          <td ng-bind="ia.activityDate"></td>
+          <td ng-bind="ia.items"></td>
+          <td>
+        <span ng-if="ia.status == 'started'">
+        <button class="btn btn-xs btn-primary"
+                ng-click="ctrl.stop(ia.id)">Stop
+        </button>
+        </span>
+        <span ng-if="ia.status != 'started'">
+        <button class="btn btn-xs btn-primary"
+                ng-click="ctrl.stop(ia.id)">Stop
+        </button>
+        </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </div>

@@ -1,70 +1,30 @@
 (function () {
   function ModuleConfig(moondashMockRestProvider) {
 
-    var features = {
-      resource: {
-        id: 99, title: 'Features'
+    var communities = [
+      {
+        id: 1, name: 'Default Community', activityDate: '2010/11/19',
+        items: 4723, status: 'none'
       },
-      items: [
-        'Split into better file structure (module.js, states.js, etc.)',
-        'This feature list is done with a mock API calls'
-      ]
-    };
-
-
-    var resourceTypes = [
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Bob", "lastName": "Barker"},
-      {"firstName": "Cox", "lastName": "Carney"},
-      {"firstName": "Derek", "lastName": "Dominoes"},
-      {"firstName": "Gil", "lastName": "Gerard"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Harry", "lastName": "Carrey"},
-      {"firstName": "Jules", "lastName": "Verne"}
-
+      {
+        id: 2, name: 'Another Community', activityDate: '2011/1/9',
+        items: 23, status: 'none'
+      },
+      {
+        id: 3,
+        name: 'Testing 123 With A Long Title That Goes On',
+        activityDate: '2010/11/19',
+        items: 7,
+        status: 'none'
+      },
+      {
+        id: 4, name: 'Africa...it is big', activityDate: '2011/4/16',
+        items: 9999, status: 'none'
+      },
+      {
+        id: 5, name: 'Merica', activityDate: '2009/10/07',
+        items: 548, status: 'none'
+      }
     ];
 
     moondashMockRestProvider.addMocks(
@@ -72,7 +32,7 @@
       [
         {
           pattern: /api\/to_archive$/,
-          responseData: resourceTypes
+          responseData: communities
         }
       ]);
 
