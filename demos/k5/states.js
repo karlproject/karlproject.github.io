@@ -36,6 +36,22 @@
                  }
                }
              })
+      .state('admin.archive_box', {
+               url: '/archive_box',
+               title: 'Archive to Box',
+               section: {group: 'admin'},
+               views: {
+                 'md-content@root': {
+                   templateUrl: 'templates/box_list.html',
+                   controller: 'BoxListCtrl as ctrl',
+                   resolve: {
+                     resource: function (Restangular) {
+                       return Restangular.all('to_archive').getList();
+                     }
+                   }
+                 }
+               }
+             })
       .state('admin.siteannounce', {
                url: '/siteannouncement',
                title: 'Site Announcement',
@@ -45,12 +61,13 @@
                    template: '<h1>Site Announcement</h1>'
                  }
                }
-             }).state('admin.logs', {
-                        url: '/logs',
-                        title: 'Logs',
-                        parent: 'admin',
-                        section: {group: 'admin'}
-                      })
+             })
+      .state('admin.logs', {
+               url: '/logs',
+               title: 'Logs',
+               parent: 'admin',
+               section: {group: 'admin'}
+             })
       .state('admin.logs.system_logs', {
                url: '/system_logs',
                title: 'System Logs',
@@ -194,7 +211,12 @@
              })
   }
 
+  function ModuleRun(MdConfig) {
+    MdConfig.siteName = 'KARL';
+  }
+
   angular.module('k5')
-    .config(ModuleConfig);
+    .config(ModuleConfig)
+    .run(ModuleRun);
 
 })();

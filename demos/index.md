@@ -8,9 +8,9 @@ order: 2
 
 These demos show various iterations of prototypes etc.
 
-## Dashboard (mocked backend)
+## k5 (mocked backend)
 
-[demo](/demos/dashboard)
+[demo](/demos/k5)
 
 Example of a full-fledged Dashboard for various admin (or even end-user) 
 use cases. The "frontend" can run on another server, as shown in this 

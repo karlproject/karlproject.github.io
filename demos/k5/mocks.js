@@ -1,7 +1,6 @@
 (function () {
   function ModuleConfig(moondashMockRestProvider) {
 
-    // TODO move this around later
     var features = {
       resource: {
         id: 99, title: 'Features'
@@ -12,19 +11,6 @@
       ]
     };
 
-    moondashMockRestProvider.addMocks(
-      'features',
-      [
-        {
-          pattern: /api\/features$/,
-          responseData: features
-        },
-        {
-          pattern: /api\/security\/backend/,
-          authenticate: true,
-          responseData: []
-        }
-      ]);
 
     var resourceTypes = [
       {"firstName": "Bob", "lastName": "Barker"},
@@ -82,14 +68,13 @@
     ];
 
     moondashMockRestProvider.addMocks(
-      'grid',
+      'box',
       [
         {
-          pattern: /api\/rtypes$/,
+          pattern: /api\/to_archive$/,
           responseData: resourceTypes
         }
       ]);
-
 
   }
 

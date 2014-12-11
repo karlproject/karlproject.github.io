@@ -3,15 +3,19 @@
 <head>
   <meta charset="utf-8">
   <title ng-bind="layout.pageTitle">Some Title</title>
-  <link rel="stylesheet" href="../moondash.css">
+  <link type="text/css" rel="stylesheet"
+        href="https://rawgit.com/MoonshotProject/moondash/v0.0.4-alpha/dist/moondash.css">
   <link rel="stylesheet" href="demo.css">
 </head>
 <body class="mockApi">
 <div ui-view></div>
 
-<script src="../moondash-vendors.js"></script>
-<script src="../moondash.js"></script>
-<script src="../moondash-templates.js"></script>
+<script
+    src="https://cdn.rawgit.com/MoonshotProject/moondash/v0.0.4-alpha/dist/moondash-vendors-with-mock.js"></script>
+<script
+    src="https://cdn.rawgit.com/MoonshotProject/moondash/v0.0.4-alpha/dist/moondash.js"></script>
+<script
+    src="https://cdn.rawgit.com/MoonshotProject/moondash/v0.0.4-alpha/dist/moondash-templates.js"></script>
 <script src="module.js"></script>
 <script src="states.js"></script>
 <script src="controllers.js"></script>
