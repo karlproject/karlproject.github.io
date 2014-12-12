@@ -29,25 +29,21 @@
           target.status = success.status;
         },
         function (failure) {
-          console.debug('failed');
+          console.debug('failed', failure);
         }
       )
     };
 
 
-    $scope.items = ['item1', 'item2', 'item3'];
     this.showLog = function (target) {
-      // Provide a modal
-
-      console.debug('starting');
-
       var modalInstance = $modal.open(
         {
           templateUrl: 'myModalContent.html',
-          controller: 'ModalCtrl',
+          controller: 'ModalCtrl as ctrl',
+          size: 'lg',
           resolve: {
-            items: function () {
-              return $scope.items;
+            target: function () {
+              return target;
             }
           }
         });
@@ -55,19 +51,24 @@
 
   }
 
-  function ModalCtrl($scope, $modalInstance, items) {
-
-    $scope.items = items;
-    $scope.selected = {
-      item: $scope.items[0]
+  function ModalCtrl($modalInstance, target) {
+    var _this = this;
+    this.logEntries = [];
+    this.updateLog = function () {
+      target.customGET('logEntries', {})
+        .then(
+        function (success) {
+          _this.logEntries = success;
+        },
+        function (failure) {
+          console.debug('failure', failure);
+        }
+      )
     };
+    this.updateLog();
 
-    $scope.ok = function () {
-      $modalInstance.close($scope.selected.item);
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    this.close = function () {
+      $modalInstance.dismiss();
     };
   }
 

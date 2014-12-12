@@ -69,6 +69,20 @@
         },
         {
           method: 'GET',
+          pattern: /api\/to_archive\/(\d+)\/logEntries/,
+          responder: function () {
+            console.debug('respond')
+            var response = [
+              {timestamp: '2014/12/01 09:30:01', msg: 'Some message'},
+              {timestamp: '2014/12/01 09:30:01', msg: '2Some message'},
+              {timestamp: '2014/12/01 09:30:01', msg: '3Some message'},
+              {timestamp: '2014/12/01 09:30:01', msg: '4Some message'}
+            ];
+            return [200, response];
+          }
+        },
+        {
+          method: 'GET',
           pattern: /api\/to_archive.*$/,
           responder: function (method, url) {
             /*
