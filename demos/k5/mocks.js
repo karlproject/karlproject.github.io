@@ -111,7 +111,7 @@
             if (params.inactive == 'true') {
               filtered = _(communities).filter(
                 function (item) {
-                  return !item.activityDate.startsWith('2014');
+                  return item.activityDate.indexOf('2014') != 0;
                 }
               ).value();
             }
