@@ -45,6 +45,13 @@
       }
     ];
 
+    var initialLogEntries = [
+      {timestamp: '2014/12/01 09:30:01', msg: 'Some message'},
+      {timestamp: '2014/12/01 09:30:01', msg: '2Some message'},
+      {timestamp: '2014/12/01 09:30:01', msg: '3Some message'},
+      {timestamp: '2014/12/01 09:30:01', msg: '4Some message'}
+    ];
+
     moondashMockRestProvider.addMocks(
       'box',
       [
@@ -71,14 +78,22 @@
           method: 'GET',
           pattern: /api\/to_archive\/(\d+)\/logEntries/,
           responder: function () {
-            console.debug('respond')
-            var response = [
-              {timestamp: '2014/12/01 09:30:01', msg: 'Some message'},
-              {timestamp: '2014/12/01 09:30:01', msg: '2Some message'},
-              {timestamp: '2014/12/01 09:30:01', msg: '3Some message'},
-              {timestamp: '2014/12/01 09:30:01', msg: '4Some message'}
-            ];
-            return [200, response];
+            // Each time called, make up 5 entries and put them
+            // in the front of the array, to simulate the server
+            // generating more log entries.
+            var now, timestamp, rand;
+            _(_.range(15)).forEach(function () {
+              now = new Date();
+              timestamp = now.toLocaleString();
+              rand = _.random(1000, 9999);
+              initialLogEntries.unshift(
+                {
+                  timestamp: timestamp,
+                  msg: rand + ' Some message ' + timestamp
+                }
+              );
+            });
+            return [200, initialLogEntries];
           }
         },
         {

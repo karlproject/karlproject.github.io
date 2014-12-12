@@ -51,7 +51,7 @@
 
   }
 
-  function ModalCtrl($modalInstance, target) {
+  function ModalCtrl($modalInstance, target, $timeout, $scope) {
     var _this = this;
     this.logEntries = [];
     this.updateLog = function () {
@@ -66,6 +66,19 @@
       )
     };
     this.updateLog();
+
+    // Now poll
+    var seconds = 5;
+    var timer = $timeout(
+      function () {
+        _this.updateLog();
+      }, seconds * 1000
+    );
+    $scope.$on(
+      'destroy',
+      function () {
+        $timeout.cancel(timer);
+      });
 
     this.close = function () {
       $modalInstance.dismiss();
