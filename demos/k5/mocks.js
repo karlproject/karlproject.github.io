@@ -21,26 +21,26 @@
 
     var communities = [
       {
-        id: 1, name: 'Default Community', activityDate: '2010/11/19',
+        id: '1', name: 'Default Community', activityDate: '2010/11/19',
         items: 4723, status: 'none'
       },
       {
-        id: 2, name: 'Another Community', activityDate: '2011/01/09',
+        id: '2', name: 'Another Community', activityDate: '2011/01/09',
         items: 23, status: 'none'
       },
       {
-        id: 3,
+        id: '3',
         name: 'Testing 123 With A Long Title That Goes On',
         activityDate: '2010/03/04',
         items: 7,
         status: 'none'
       },
       {
-        id: 4, name: 'Africa...it is big', activityDate: '2014/04/16',
+        id: '4', name: 'Africa...it is big', activityDate: '2014/04/16',
         items: 9999, status: 'none'
       },
       {
-        id: 5, name: 'Merica', activityDate: '2014/10/07',
+        id: '5', name: 'Merica', activityDate: '2014/10/07',
         items: 548, status: 'none'
       }
     ];
@@ -49,13 +49,32 @@
       'box',
       [
         {
+          method: 'POST',
+          pattern: /api\/to_archive\/(\d+)\/setStatus/,
+          responder: function (method, url, data) {
+            // Given /api/to_archive/someDocId/setStatus
+            // - Grab that community
+            // - Change its status to the passed in 'status' value
+            // - return ok
+            var id = url.split("/")[3],
+              target = _(communities).first({id: id}),
+              newStatus = 'stopped';
+            data = angular.fromJson(data);
+            if (data.status == 'start') {
+              newStatus = 'started';
+            }
+            target.status = newStatus;
+            return [200, {status: newStatus}];
+          }
+        },
+        {
           method: 'GET',
           pattern: /api\/to_archive.*$/,
           responder: function (method, url) {
             /*
-            Process two filters:
-            - inactive == 'true' or otherwise
-            - filterText, lowercase comparison
+             Process two filters:
+             - inactive == 'true' or otherwise
+             - filterText, lowercase comparison
              */
             var params = getParams(url);
             var filtered = _(communities).clone();
